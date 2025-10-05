@@ -1,0 +1,44 @@
+version: "3.8"
+services:
+  db:
+    image: postgres:14
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"   # optional: allow host access
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"    # pgAdmin UI -> http://localhost:5050
+    depends_on:
+      - db
+
+  app:
+    build: .
+    restart: "no"
+    environment:
+      # point app to container db service
+      PG_HOST: db
+      PG_PORT: 5432
+      PG_DB: postgres
+      PG_USER: postgres
+      PG_PW: postgres
+      OPEN_PGADMIN: "0"
+    depends_on:
+      - db
+    # If you want to re-run script locally from host volume, mount:
+    volumes:
+      - ./:/app
+
+volumes:
+  pgdata:

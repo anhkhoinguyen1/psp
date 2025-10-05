@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PSP-Arduino Dashboard</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>PSP-Arduino Dashboard</h1>
+
+    <div class="card">
+      <h2>Status</h2>
+      <div id="status" class="muted">Starting…</div>
+      <div>Last sample: <span id="timestamp">—</span></div>
+      <div style="margin-top:8px">
+        <a class="btn secondary" href="/api/export.json">Download JSON</a>
+        <button type="button" class="btn danger" id="clear-data">Clear Data</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>FSRs Layout (drag inside box)</h2>
+      <div id="fsr-area">
+  <div class="fsr-draggable" id="fsr0">
+    <span class="fsr-label">FSR 1</span>
+    <span class="fsr-value">0</span>
+  </div>
+  <div class="fsr-draggable" id="fsr1">
+    <span class="fsr-label">FSR 2</span>
+    <span class="fsr-value">0</span>
+  </div>
+  <div class="fsr-draggable" id="fsr2">
+    <span class="fsr-label">FSR 3</span>
+    <span class="fsr-value">0</span>
+  </div>
+  <div class="fsr-draggable" id="fsr3">
+    <span class="fsr-label">FSR 4</span>
+    <span class="fsr-value">0</span>
+  </div>
+  <div class="fsr-draggable" id="fsr4">
+    <span class="fsr-label">FSR 5</span>
+    <span class="fsr-value">0</span>
+  </div>
+  <div class="fsr-draggable" id="fsr5">
+    <span class="fsr-label">FSR 6</span>
+    <span class="fsr-value">0</span>
+  </div>
+  <div class="fsr-draggable" id="fsr6">
+    <span class="fsr-label">FSR 7</span>
+    <span class="fsr-value">0</span>
+  </div>
+  <div class="fsr-draggable" id="fsr7">
+    <span class="fsr-label">FSR 8</span>
+    <span class="fsr-value">0</span>
+  </div>
+</div>
+
+    </div>
+
+    <div class="card">
+      <h2>Temps & Volume</h2>
+      <div class="row">
+        <div>Temp 1: <b id="t1">--</b> °C</div>
+        <div class="spacer">Temp 2: <b id="t2">--</b> °C</div>
+      </div>
+      <svg id="temp-chart"></svg>
+      <div style="margin-top:8px">
+        Volume
+        <div class="volume-wrap">
+          <div id="volume-bar"></div>
+        </div>
+        <div><b id="volume-label">0</b> / 100</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>GitHub Dumps</h2>
+      <div class="row">
+        <label><input type="checkbox" id="dump-enabled"> Enable</label>
+        <label class="spacer">Rows before dump:
+          <input type="number" id="dump-interval" min="1" value="10">
+        </label>
+        <label class="spacer">Path in repo:
+          <input type="text" id="dump-path" value="PSP-Arduino/Data">
+        </label>
+        <button type="button" class="btn" id="dump-save">Save</button>
+        <button type="button" class="btn" id="dump-now">Dump Now</button>
+        <button type="button" class="btn danger" id="dump-delete">Delete Repo Data</button>
+      </div>
+      <div id="dump-info" class="muted" style="margin-top:6px;"></div>
+      <div id="dump-last" class="muted" style="margin-top:6px;"></div>
+    </div>
+  </div>
+  <script src="/static/app.js"></script>
+</body>
+</html>
